@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: SpringAI
+
+  datasource:
+    url: jdbc:postgresql://localhost:5434/vector-db
+    username: vector-root
+    password: vector-pass
+    driver-class-name: org.postgresql.Driver
+
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        options:
+          model: qwen3:0.6b
+      embedding:
+        options:
+          model: nomic-embed-text:latest
+
+    vectorstore:
+      pgvector:
+        initialize-schema: true
+
+logging:
+  level:
+    org.springframework.ai: DEBUG
