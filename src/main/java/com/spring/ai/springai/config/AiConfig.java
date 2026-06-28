@@ -13,14 +13,22 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@RequiredArgsConstructor
 public class AiConfig {
+
+    private final VectorStore vectorStore;
 
 
     @Bean
-    public ChatClient chatClient(ChatClient.Builder chatClientBuilder) {
+    public ChatClient chatClient(ChatClient.Builder chatClientBuilder, ChatMemory chatMemory) {
         return chatClientBuilder
                 .defaultAdvisors(
-                        new SimpleLoggerAdvisor())
+                        new SimpleLoggerAdvisor(),
+                        MessageChatMemoryAdvisor.builder(chatMemory).build(),
+                        VectorStoreChatMemoryAdvisor
+                                .builder(vectorStore)
+                                .defaultTopK(3)
+                                .build())
                 .build();
     }
 

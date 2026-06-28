@@ -46,12 +46,6 @@ public class RAGService {
                         """)
                 .user(prompt)
                 .advisors(
-//                        MessageChatMemoryAdvisor.builder(chatMemory).build(),
-                        VectorStoreChatMemoryAdvisor
-                                .builder(vectorStore)
-                                .defaultTopK(3)
-                                .build()
-                ).advisors(
                         advisorSpec -> advisorSpec
                                 .param(ChatMemory.CONVERSATION_ID, userId)
                 )

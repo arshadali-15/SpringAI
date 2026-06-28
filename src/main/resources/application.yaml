@@ -17,6 +17,13 @@ spring:
       embedding:
         options:
           model: nomic-embed-text:latest
+    chat:
+      memory:
+        repository:
+          jdbc:
+            initialize-schema: always
+            table-name: chat-memory
+
 
     vectorstore:
       pgvector:
